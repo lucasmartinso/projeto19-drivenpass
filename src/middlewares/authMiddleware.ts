@@ -7,6 +7,8 @@ export async function validateTokenAuth(req: Request, res: Response, next: NextF
     const { authorization }: any = req.headers;
     const tokenAuth: string = authorization?.replace("Bearer ", ""); 
 
+    if(!tokenAuth) throw { code: "Unathorized", message: "Insert a token auth"};
+
     const exist: tokens | null = await usersService.existToken(tokenAuth);
 
     if(!tokenAuth || !exist) { 

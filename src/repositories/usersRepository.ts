@@ -15,10 +15,10 @@ export async function postToken(userId: number, token: string): Promise<void> {
     await prisma.tokens.create({ data: { userId, token }});
 }
 
-export async function findToken(token: string) { 
+export async function findToken(token: string | undefined): Promise<tokens | null> { 
     const result: tokens | null = await prisma.tokens.findUnique({ where: { token }});
-
-   return result;
+    
+    return result;
 }
 
 export async function deleteToken(token:string): Promise<void> {
