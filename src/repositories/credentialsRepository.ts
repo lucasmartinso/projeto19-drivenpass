@@ -10,3 +10,9 @@ export async function findUserTitle(userId: number, title: string) {
     
     return result;
 }
+
+export async function findUserCredentials(userId: number) { 
+    const result = await prisma.credentials.findMany({ where: { userId }}); 
+
+    return result;
+}

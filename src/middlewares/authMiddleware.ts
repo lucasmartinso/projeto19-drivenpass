@@ -16,6 +16,7 @@ export async function validateTokenAuth(req: Request, res: Response, next: NextF
     } 
 
     res.locals.token = tokenAuth;
+    res.locals.user = exist;
 
     next();
 }

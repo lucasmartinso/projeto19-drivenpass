@@ -1,4 +1,4 @@
-import { credentials } from "@prisma/client";
+import { credentials, tokens } from "@prisma/client";
 import { Request, Response } from "express"; 
 import * as credentialsService from "../services/credentialsService";
 import * as utilsService from "../utils/findUserService";
@@ -19,4 +19,21 @@ export async function createCredentials(req: Request, res: Response): Promise<vo
     await credentialsService.verifyUserRepeteadCredentials(credentialsData);
     await credentialsService.createCredentials(credentialsData);
     res.sendStatus(201);
+}  
+
+export async function findCredential(req: Request, res: Response) {
+    const { userId }: tokens  = res.locals.user;
+    
+    res.sendStatus(200);
 }
+
+export async function getAllCredentials(req: Request, res: Response) {
+    const { userId }: tokens  = res.locals.user;
+
+    const userCredentials = await credentialsService.getAllCredentials(userId) 
+    
+    res.status(200).json({
+        credentials: userCredentials
+    });
+}
+
