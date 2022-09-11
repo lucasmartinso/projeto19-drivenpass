@@ -6,7 +6,7 @@ import { createCredentials, deleteCredentials, findCredential, getAllCredentials
 
 const credentialsRouter = Router();
 
-credentialsRouter.post("/credentials/:id", schemaValidation(credentialsSchema),validateTokenAuth,createCredentials); 
+credentialsRouter.post("/credentials", schemaValidation(credentialsSchema),validateTokenAuth,createCredentials); 
 credentialsRouter.get("/credentials/:id", validateTokenAuth,findCredential);
 credentialsRouter.get("/credentials",validateTokenAuth,getAllCredentials);
 credentialsRouter.delete("/credentials/:id",validateTokenAuth,deleteCredentials);

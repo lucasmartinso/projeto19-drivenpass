@@ -5,12 +5,12 @@ import * as utilsService from "../utils/findUserService";
 
 
 export async function createCredentials(req: Request, res: Response): Promise<void> {
-    const id: number = Number(req.params.id);
+    const { userId }: tokens  = res.locals.user;
     const { title, url, username, password }: Omit<credentials, 'id' | 'userId'> = req.body;
 
-    await utilsService.findUser(id);
+    await utilsService.findUser(userId);
     const credentialsData: Omit<credentials, 'id' | 'createdAt'> = { 
-        userId: id,
+        userId: userId,
         title,
         url, 
         username, 
