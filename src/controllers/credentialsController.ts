@@ -38,5 +38,14 @@ export async function getAllCredentials(req: Request, res: Response) {
     res.status(200).json({
         credentials: userCredentials
     });
+} 
+
+export async function deleteCredentials(req: Request, res: Response) { 
+    const { userId }: tokens  = res.locals.user;
+    const credentialId: number = Number(req.params.id);
+
+    await credentialsService.deleteCredential(credentialId,userId);
+
+    res.sendStatus(204); 
 }
 

@@ -2,6 +2,16 @@ import { credentials } from "@prisma/client";
 import * as credentialsRepository from "../repositories/credentialsRepository"
 import { criptPassword, descriptPassword } from "../utils/encriptDescriptPasswords";
 
+async function verifyCredential(id: number, userId: number): Promise<credentials> { 
+    const userCredential: credentials | null = await credentialsRepository.findCredential(id);
+
+    if(!userCredential) throw { code: "Not Found", message:  "This credentials don't exist yet"}
+
+    if(userCredential.userId !== userId) throw { code: "Not Found", message:  "This credentials don't belongs to you"} 
+
+    return userCredential;
+}
+
 export async function createCredentials(credentialsData: Omit<credentials, 'id' | 'createdAt'>) {
     const encriptPassword = await criptPassword(credentialsData.password);
     await credentialsRepository.postCredentials({...credentialsData, password: encriptPassword});
@@ -12,6 +22,14 @@ export async function verifyUserRepeteadCredentials({userId,title}: Omit<credent
     if(repeteadTitle) throw { code: "Bad Request", message: "This title already has been declareted by this user"};
 }
 
+export async function getCredential(id: number, userId: number) {
+    const userCredential: credentials | null = await verifyCredential(id,userId);
+
+    userCredential.password = await descriptPassword(userCredential.password);
+
+    return userCredential;
+} 
+
 export async function getAllCredentials(userId: number) { 
     const userCredentials: credentials[] = await credentialsRepository.findUserCredentials(userId);
 
@@ -20,16 +38,11 @@ export async function getAllCredentials(userId: number) {
     }
 
     return userCredentials;
-} 
+}  
 
-export async function getCredential(id: number, userId: number) {
-    const userCredential: credentials | null = await credentialsRepository.findCredential(id);
+export async function deleteCredential(credentialId: number, userId: number) {
+    await verifyCredential(credentialId,userId);
 
-    if(!userCredential) throw { code: "Not Found", message:  "This credentials don't exist yet"}
-
-    if(userCredential.userId !== userId) throw { code: "Not Found", message:  "This credentials don't belongs to you"} 
-
-    userCredential.password = await descriptPassword(userCredential.password);
-
-    return userCredential;
+    await credentialsRepository.deletCredential(credentialId);
 }
+

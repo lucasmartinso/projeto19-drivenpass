@@ -21,4 +21,8 @@ export async function findCredential(credentialId: number): Promise<credentials 
     const result: credentials | null = await prisma.credentials.findUnique({ where: { id: credentialId }});
 
     return result;
+} 
+
+export async function deletCredential(credentialId:  number): Promise<void> { 
+    await prisma.credentials.delete({ where: {id: credentialId}});
 }
