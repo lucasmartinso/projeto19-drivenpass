@@ -23,14 +23,17 @@ export async function createCredentials(req: Request, res: Response): Promise<vo
 
 export async function findCredential(req: Request, res: Response) {
     const { userId }: tokens  = res.locals.user;
+    const id: number = Number(req.params.id);
+
+    const userCredential: credentials = await credentialsService.getCredential(id,userId);
     
-    res.sendStatus(200);
+    res.status(200).send(userCredential);
 }
 
 export async function getAllCredentials(req: Request, res: Response) {
     const { userId }: tokens  = res.locals.user;
 
-    const userCredentials = await credentialsService.getAllCredentials(userId) 
+    const userCredentials = await credentialsService.getAllCredentials(userId); 
     
     res.status(200).json({
         credentials: userCredentials

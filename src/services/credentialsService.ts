@@ -20,4 +20,16 @@ export async function getAllCredentials(userId: number) {
     }
 
     return userCredentials;
+} 
+
+export async function getCredential(id: number, userId: number) {
+    const userCredential: credentials | null = await credentialsRepository.findCredential(id);
+
+    if(!userCredential) throw { code: "Not Found", message:  "This credentials don't exist yet"}
+
+    if(userCredential.userId !== userId) throw { code: "Not Found", message:  "This credentials don't belongs to you"} 
+
+    userCredential.password = await descriptPassword(userCredential.password);
+
+    return userCredential;
 }
