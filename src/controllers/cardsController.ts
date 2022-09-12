@@ -31,21 +31,26 @@ export async function findCard(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
     const cardId: number = Number(req.params.id);
 
-    const userCredential: cards = await cardsService.getCard(cardId,userId);
+    const userCard: cards = await cardsService.getCard(cardId,userId);
 
-    res.status(200).send(userCredential);
+    res.status(200).send(userCard);
 }  
 
 export async function getAllUserCards(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
-    const cardId: number = Number(req.params.id);
 
-    res.sendStatus(200);
+    const userCards = await cardsService.getAllCards(userId); 
+    
+    res.status(200).json({
+        cards: userCards
+    });
 }  
 
 export async function deleteCard(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
     const cardId: number = Number(req.params.id);
 
-    res.sendStatus(200);
+    await cardsService.deleteCard(cardId,userId);
+
+    res.sendStatus(204);
 }  
