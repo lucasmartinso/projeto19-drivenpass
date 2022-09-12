@@ -17,6 +17,7 @@ model Users {
   createdAt DateTime @default(now())
   tokens tokens[]
   credentials credentials[]
+  safeNotes safeNotes[]
 } 
 
 model tokens { 
@@ -34,5 +35,14 @@ model credentials {
   url String 
   username String 
   password String
+  createdAt DateTime @default(now())
+} 
+
+model safeNotes { 
+  id Int @id @default(autoincrement()) 
+  user Users @relation(fields: [userId], references: [id])
+  userId Int 
+  title String 
+  description String
   createdAt DateTime @default(now())
 }

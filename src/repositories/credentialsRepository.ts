@@ -5,7 +5,7 @@ export async function postCredentials({userId,title,url,username,password}: Omit
     await prisma.credentials.create({ data: { userId, title, url, username, password }});
 } 
 
-export async function findUserTitle(userId: number, title: string) {
+export async function findUserTitle(userId: number, title: string): Promise<credentials | null> {
     const result: credentials | null = await prisma.credentials.findFirst({ where: { userId, title }});
     
     return result;
