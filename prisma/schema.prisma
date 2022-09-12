@@ -16,6 +16,7 @@ model Users {
   password String 
   createdAt DateTime @default(now())
   tokens tokens[]
+  credentials credentials[]
 } 
 
 model tokens { 
@@ -23,4 +24,15 @@ model tokens {
   token String @unique
   user Users @relation(fields: [userId], references: [id])
   userId Int 
+} 
+
+model credentials { 
+  id Int @id @default(autoincrement()) 
+  user Users @relation(fields: [userId], references: [id])
+  userId Int 
+  title String 
+  url String 
+  username String 
+  password String
+  createdAt DateTime @default(now())
 }
