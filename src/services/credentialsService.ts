@@ -22,7 +22,7 @@ export async function verifyUserRepeteadCredentials({userId,title}: Omit<credent
     if(repeteadTitle) throw { code: "Bad Request", message: "This title already has been declareted by this user"};
 }
 
-export async function getCredential(id: number, userId: number) {
+export async function getCredential(id: number, userId: number):  Promise<credentials> {
     const userCredential: credentials | null = await verifyCredential(id,userId);
 
     userCredential.password = await descriptPassword(userCredential.password);
@@ -30,7 +30,7 @@ export async function getCredential(id: number, userId: number) {
     return userCredential;
 } 
 
-export async function getAllCredentials(userId: number) { 
+export async function getAllCredentials(userId: number): Promise<credentials[]> { 
     const userCredentials: credentials[] = await credentialsRepository.findUserCredentials(userId);
 
     for(let i=0; i<userCredentials.length; i++) { 
@@ -40,7 +40,7 @@ export async function getAllCredentials(userId: number) {
     return userCredentials;
 }  
 
-export async function deleteCredential(credentialId: number, userId: number) {
+export async function deleteCredential(credentialId: number, userId: number): Promise<void> {
     await verifyCredential(credentialId,userId);
 
     await credentialsRepository.deletCredential(credentialId);
