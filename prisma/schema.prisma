@@ -52,6 +52,7 @@ model cards {
   id Int @id @default(autoincrement()) 
   user Users @relation(fields: [userId], references: [id])
   userId Int 
+  title String
   number String @unique 
   name String
   cvc Int 

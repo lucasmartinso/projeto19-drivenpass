@@ -1,9 +1,15 @@
 import { cards } from "@prisma/client";
 import prisma from "../databases/prisma";
 
-export async function postCard({ userId, number, name, cvc, expirateDate, password, isVirtual, type }: Omit<cards, 'id' | 'createdAt'>): Promise<void> { 
-    await prisma.cards.create({ data: { userId, number, name, cvc, expirateDate, password, isVirtual, type }});
+export async function postCard({ userId, title, number, name, cvc, expirateDate, password, isVirtual, type }: Omit<cards, 'id' | 'createdAt'>): Promise<void> { 
+    await prisma.cards.create({ data: { userId, title, number, name, cvc, expirateDate, password, isVirtual, type }});
 } 
+
+export async function findUserTitle(userId: number, title: string): Promise<cards | null> {
+    const result: cards | null = await prisma.cards.findFirst({ where: { userId, title }});
+    
+    return result;
+}
 
 export async function findCard(cardId: number): Promise<cards | null> { 
     const result: cards | null = await prisma.cards.findUnique({ where : { id: cardId }});
