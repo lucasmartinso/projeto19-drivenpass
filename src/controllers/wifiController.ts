@@ -34,10 +34,10 @@ export async function findWifi(req: Request, res: Response): Promise<void> {
 export async function getAllUserWifi(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
 
-    const userCards = await cardsService.getAllCards(userId); 
+    const userWifis = await wifiService.getAllWifi(userId); 
     
     res.status(200).json({
-        cards: userCards
+        wifi: userWifis
     });
 }  
 
