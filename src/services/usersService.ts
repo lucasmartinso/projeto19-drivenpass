@@ -5,6 +5,9 @@ import { deleteToken, findEmail, findToken, postToken, postUser }from "../reposi
 
 async function emailSearch(email: string): Promise<Users | null> { 
     const userData: Users | null = await findEmail(email);
+
+    if(!userData) throw { code: "Not Found", message: "This email doesn't exist" } 
+
     return userData;
 }
 
