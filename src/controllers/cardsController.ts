@@ -31,7 +31,9 @@ export async function findCard(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
     const cardId: number = Number(req.params.id);
 
-    res.sendStatus(200);
+    const userCredential: cards = await cardsService.getCard(cardId,userId);
+
+    res.status(200).send(userCredential);
 }  
 
 export async function getAllUserCards(req: Request, res: Response): Promise<void> {

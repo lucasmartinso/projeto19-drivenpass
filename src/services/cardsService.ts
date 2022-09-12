@@ -19,6 +19,33 @@ export async function verifyUserRepeteadCard({userId,title}: Omit<cards, 'id' | 
 
 export async function createCard(cardData: Omit<cards, 'id' | 'createdAt'>) {
     const criptPassword: string = await utilsService.criptPassword(cardData.password);
-    cardData = {...cardData, cvc: Number(cardData.cvc), password: criptPassword };
+    const criptCvc: string = await utilsService.criptPassword(cardData.cvc)
+    cardData = {...cardData, cvc: criptCvc, password: criptPassword };
     await cardsRepository.postCard(cardData); 
+} 
+
+export async function getCard(id: number, userId: number):  Promise<cards> {
+    const userCard: cards | null = await verifyCard(id,userId);
+
+    userCard.password = await utilsService.descriptPassword(userCard.password);
+    userCard.cvc = await utilsService.descriptPassword(userCard.cvc);
+
+    return userCard;
+} 
+
+export async function getAllCards(userId: number): Promise<cards[]> { 
+    const userCards: cards[] = await cardsRepository.getAllUserCards(userId);
+
+    for(let i=0; i<userCards.length; i++) { 
+        userCards[i].password = await utilsService.descriptPassword(userCards[i].password);
+        userCards[i].cvc = await utilsService.descriptPassword(userCards[i].cvc);
+    }
+
+    return userCards;
+}   
+
+export async function deleteCard(cardId: number, userId: number): Promise<void> {
+    await verifyCard(cardId,userId);
+
+    await cardsRepository.deleteCard(cardId);
 }

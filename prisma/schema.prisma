@@ -55,7 +55,7 @@ model cards {
   title String
   number String @unique 
   name String
-  cvc Int 
+  cvc String 
   expirateDate String
   password String 
   isVirtual Boolean
