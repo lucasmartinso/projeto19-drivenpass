@@ -23,12 +23,12 @@ export async function createWifi(req: Request, res: Response): Promise<void> {
 }  
 
 export async function findWifi(req: Request, res: Response): Promise<void> {
-    const { userId }: cards  = res.locals.user;
-    const cardId: number = Number(req.params.id);
+    const { userId }: wifi  = res.locals.user;
+    const wifiId: number = Number(req.params.id);
 
-    const userCard: cards = await cardsService.getCard(cardId,userId);
+    const userWifi: wifi = await wifiService.getWifi(wifiId,userId);
 
-    res.status(200).send(userCard);
+    res.status(200).send(userWifi);
 }  
 
 export async function getAllUserWifi(req: Request, res: Response): Promise<void> {
