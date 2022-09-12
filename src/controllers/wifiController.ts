@@ -43,9 +43,9 @@ export async function getAllUserWifi(req: Request, res: Response): Promise<void>
 
 export async function deleteWifi(req: Request, res: Response): Promise<void> {
     const { userId }: cards  = res.locals.user;
-    const cardId: number = Number(req.params.id);
+    const wifiId: number = Number(req.params.id);
 
-    await cardsService.deleteCard(cardId,userId);
+    await wifiService.deleteWifi(wifiId,userId);
 
     res.sendStatus(204);
 }  
