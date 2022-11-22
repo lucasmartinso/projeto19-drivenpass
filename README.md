@@ -6,7 +6,7 @@
 
 ##  :clipboard: Description
 
-This is an backend aplication to controll the data flow of an website/ mobile app of restaurants, coffes review's, where the user can create your own review, and places that doesn't are already registred. Also, the user can explore different places, searching by name, best/worse rating food, attendance, environment and price. The main resposnsability this backend have is to secure the user and place data, keeping the important and sensitive infos cripted, also have to make the quickly integration and communication with database and also with the frontend. 
+This is an backend aplication to controll the data flow of an website/ mobile app of passwords, where the user can manage your own password about cards, wifi, credentials and safe notes, and that user needs to know only your main password to login to handle the other passwords. Also, that user passwords are cripted and safe ensuring the reliability of them. The main resposnsability this backend have is to secure the user and his passwords safe, keeping the important and sensitive infos cripted, also have to make the quickly integration and communication with database and also with the frontend. 
 ***
 
 ## :computer:	 Tecnolgy and Concepts 
