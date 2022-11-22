@@ -1,45 +1,213 @@
-# projeto19-drivenpass <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f512.svg" width="40" height="40">
+# <p align = "center">🔐 Project DrivenPass 🔐</p>
 
-#### Remember to run: "npm i" -> to install dependencies, after pulling/cloning
+<p align="center">
+   <img src="https://img.freepik.com/vetores-premium/icone-de-desenho-animado-simples-com-cadeado-de-metal-em-branco_126267-9828.jpg" width="500" height="500" object-fit="cover"/>
+</p>
 
-### USERS ROUTER 👥
+##  :clipboard: Description
 
-- "Criação de contas": <br />request type: POST<br />route = /users/sign-up <br />expected object: { "email": string, "password": string}<br />
+This is an backend aplication to controll the data flow of an website/ mobile app of restaurants, coffes review's, where the user can create your own review, and places that doesn't are already registred. Also, the user can explore different places, searching by name, best/worse rating food, attendance, environment and price. The main resposnsability this backend have is to secure the user and place data, keeping the important and sensitive infos cripted, also have to make the quickly integration and communication with database and also with the frontend. 
+***
 
-- "Acesso de uma conta": <br />request type: POST<br />route = /users/sign-up <br />expected object: { "email": string, "password": string}<br />return { token: string }
+## :computer:	 Tecnolgy and Concepts 
 
-- "Sair de uma conta": <br />request type: DELETE<br />route = /users/logout <br />headers.authorization: token
+- JWTs
+- Node.js
+- TypeScript
+- PostgresSQL with Prisma ORM
 
-### CREDENTIALS ROUTER ®️
+***
 
-- "Criação de credenciais": <br />request type: POST<br />route = /credentials <br />expected object: { "title": string,"url": string,"username": string,"password": string}<br />headers.authorization: token
+## :rocket: Routes
 
-- "Busca de credenciais": <br />request type: GET<br />route = /credentials or /credentials/:id (specific credential) <br />req.params: id (specific credential)<br />headers.authorization: token
+### Users 👥
 
-- "Deleção de credenciais": <br />request type: DELETE<br />route = /credentials/:id <br />req.params: id<br />headers.authorization: token 
+```yml
+POST users/sign-up
+    - Route to create new user
+    - headers: {}
+    - body:{
+        "email": "lorem@gmail.com",
+        "password": "loremips"
+}
+```
 
-### SAFE NOUTES ROUTER 📝
+```yml
+POST users/sign-in
+    - Route to create new user
+    - headers: {}
+    - body:{
+        "email": "lorem@gmail.com",
+        "password": "loremips"
+}
+```
 
-- "Criação de notas seguras": <br />request type: POST<br />route = /credentials <br />expected object: { "title": string, "description": string}<br />headers.authorization: token
+```yml
+DELETE users/logout (autentify)
+    - Route to create new user
+    - headers: { "Authorization": `Bearer ${token}` }
+    - body:{
+        "email": "lorem@gmail.com",
+        "password": "loremips"
+}
+```
 
-- "Busca de notas seguras": <br />request type: GET<br />route = /credentials or /credentials/:id (specific note) <br />req.params: id (specific note)<br />headers.authorization: token
+### Credentials ®️
 
-- "Deleção de notas seguras": <br />request type: DELETE<br />route = /credentials/:id <br />req.params: id<br />headers.authorization: token 
+```yml 
+POST /credentials (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {
+        "title": "Lorem Ipsum",
+        "password": "lorem",
+        "username": "lorem ipsum",
+        "url": "https://lorem.com"
+    }
+```
 
-### CARDS ROUTER 💳 
+```yml 
+GET /credentials (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
 
-- "Criação de cartões": <br />request type: POST<br />route = /cards <br />expected object: { "title": string,"number": string,"name": string,"cvc": string,"expirateDate": string,"password": string,"isVirtual": boolean,"type": enum}<br />enum: "credit" | "debit" | "both"<br />headers.authorization: token
+```yml 
+GET /credentials/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
 
-- "Busca de cartões": <br />request type: GET<br />route = /cards or /cards/:id (specific card) <br />req.params: id (specific card)<br />headers.authorization: token
+```yml 
+DELETE /credentials/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
 
-- "Deleção de cartões": <br />request type: DELETE<br />route = /cards/:id <br />req.params: id<br />headers.authorization: token 
+### Safe Notes 📝
 
-### WI-FI ROUTER 🌐
 
-- "Criação de wi-fi": <br />request type: POST<br />route = /wifi <br />expected object: { "title": string,"name": string,"password": string}<br />headers.authorization: token
+```yml 
+POST /notes (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {
+        "title": "Lorem Ipsum",
+        "description": "lorem",
+        "username": "lorem ipsum",
+        "url": "https://lorem.com"
+    }
+```
 
-- "Busca de wi-fi": <br />request type: GET<br />route = /wifi or /wifi/:id (specific wi-fi) <br />req.params: id (specific wi-fi)<br />headers.authorization: token
+```yml 
+GET /notes/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
 
-- "Deleção de wi-fi": <br />request type: DELETE<br />route = /wifi/:id <br />req.params: id<br />headers.authorization: token
- 
+```yml 
+GET /notes (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
 
+```yml 
+DELETE /notes/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+### Cards 💳 
+
+```yml 
+POST /cards (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {
+        "title": "Lorem Ipsum",
+        "number": "0123456789",
+        "cvc": "123",
+        "type": "credit" | "debit" | "both"
+    }
+```
+
+```yml 
+GET /cards (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+```yml 
+GET /cards/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+```yml 
+DELETE /cards/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+### Wi-fi 🌐
+
+```yml 
+POST /wifi (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {
+        "title": "Lorem ipsum",
+        "name": "lorem",
+        "password": "lorem123"
+    }
+```
+
+```yml 
+GET /wifi (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+```yml 
+GET /wifi/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+```yml 
+DELETE /wifi/:id (autentify)
+    - Route to create a new place
+    - headers: { "Authorization": `Bearer $token` }
+    - body: {}
+```
+
+## 🏁 Running the application locally
+
+First, make the clone repository in your machine:
+
+```
+git clone https://github.com/lucasmartinso/projeto19-drivenpass.git
+```
+
+After, inside the folder, run the comand to install the dependencies.
+
+```
+npm install
+```
+Config the .env's files
+
+To finish the process, to init the server
+```
+npm start or npm run dev
+```
