@@ -23,8 +23,7 @@ export async function existToken(token: string) {
 }
 
 export async function checkUserEmail(email: string):  Promise<void>{ 
-    const existEmail: Users | null = await emailSearch(email);
-    console.log(existEmail);
+    const existEmail: Users | null = await findEmail(email);
 
     if(existEmail) { 
         throw { code: "Unathorized", message: "This email already exist"}
