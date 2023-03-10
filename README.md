@@ -96,9 +96,7 @@ POST /notes (autentify)
     - headers: { "Authorization": `Bearer $token` }
     - body: {
         "title": "Lorem Ipsum",
-        "description": "lorem",
-        "username": "lorem ipsum",
-        "url": "https://lorem.com"
+        "description": "lorem"
     }
 ```
 
