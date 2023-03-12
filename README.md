@@ -130,6 +130,7 @@ POST /cards (autentify)
     - body: {
         "title": "Lorem Ipsum",
         "number": "0123456789",
+        "password": "lorem"
         "cvc": "123",
         "type": "credit" | "debit" | "both"
     }
