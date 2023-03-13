@@ -5,8 +5,8 @@ export async function postCard({ userId, title, number, name, cvc, expirateDate,
     await prisma.cards.create({ data: { userId, title, number, name, cvc, expirateDate, password, isVirtual, type }});
 } 
 
-export async function findUserTitle(userId: number, title: string): Promise<cards | null> {
-    const result: cards | null = await prisma.cards.findFirst({ where: { userId, title }});
+export async function findUserNumber(userId: number, number: string): Promise<cards | null> {
+    const result: cards | null = await prisma.cards.findFirst({ where: { userId, number }});
     
     return result;
 }

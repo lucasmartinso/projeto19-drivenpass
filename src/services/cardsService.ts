@@ -12,9 +12,9 @@ async function verifyCard(id: number, userId: number): Promise<cards> {
     return userCard;
 } 
 
-export async function verifyUserRepeteadCard({userId,title}: Omit<cards, 'id' | 'createdAt'>) {
-    const repeteadTitle = await cardsRepository.findUserTitle(userId,title);
-    if(repeteadTitle) throw { code: "Bad Request", message: "This title already has been declareted by this user"};
+export async function verifyUserRepeteadCard({userId,number}: Omit<cards, 'id' | 'createdAt'>) {
+    const repeteadTitle = await cardsRepository.findUserNumber(userId,number);
+    if(repeteadTitle) throw { code: "Bad Request", message: "This card number already exists"};
 }
 
 export async function createCard(cardData: Omit<cards, 'id' | 'createdAt'>) {
